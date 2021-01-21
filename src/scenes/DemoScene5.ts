@@ -5,40 +5,70 @@ export default class DemoScene5 extends GameScene {
 		super({ key: 'DemoScene5' })
 	}
 
-	public init(): void {
-		//  Our attack animation
-		const animConfig = {
-			key: 'attack',
-			frames: this.anims.generateFrameNames('knight', { prefix: 'attack_A/frame', start: 0, end: 13, zeroPad: 4 }),
-			frameRate: 12,
-			repeat: -1
-		};
-		this.anims.create(animConfig);
-	}
+	public init(): void { }
 
 	public create($data): void {
 		super.create($data)
 		// 背景
-		this.setBackgroundColor(0xD4BB7D)
+		this.setBackgroundColor(0xC2A0E3)
 
-		// 雪碧图
-		const sprite = this.add.sprite(250, 100, 'knight', 'attack_A/frame0000').setScale(2.5)
-		sprite.play('attack', true);
+		const eases = [
+			'Linear',
+			'Quad.easeIn',
+			'Cubic.easeIn',
+			'Quart.easeIn',
+			'Quint.easeIn',
+			'Sine.easeIn',
+			'Expo.easeIn',
+			'Circ.easeIn',
+			'Back.easeIn',
+			'Bounce.easeIn',
+			'Quad.easeOut',
+			'Cubic.easeOut',
+			'Quart.easeOut',
+			'Quint.easeOut',
+			'Sine.easeOut',
+			'Expo.easeOut',
+			'Circ.easeOut',
+			'Back.easeOut',
+			'Bounce.easeOut',
+			'Quad.easeInOut',
+			'Cubic.easeInOut',
+			'Quart.easeInOut',
+			'Quint.easeInOut',
+			'Sine.easeInOut',
+			'Expo.easeInOut',
+			'Circ.easeInOut',
+			'Back.easeInOut',
+			'Bounce.easeInOut'
+		];
 
-		// 骨骼动画
-		const spine = this.add.spine(180, 500, 'raptor').setScale(0.2);
-		spine.play('gun-holster', true, true);
+		const cr = this.camera.getCameraRect()
+		const first = this.add.image(196 + cr.x, 32 + cr.y, 'redbar')
+		this.tweens.add({
+			targets: first,
+			x: 500,
+			ease: eases.shift(),
+			duration: 2500,
+			delay: 1000,
+			repeat: -1,
+			repeatDelay: 1000,
+			hold: 1000
+		});
 
-		this.randomPlaySpineAnimation(spine)
-	}
-
-	private randomPlaySpineAnimation($obj: SpineGameObject) {
-		const list = $obj.getAnimationList()
-		// 点击
-		$obj.setInteractive({ cursor: 'pointer' }).on('pointerdown', () => {
-			const current = list.findIndex(e => e === $obj.getCurrentAnimation().name)
-			const index = current + 1 === list.length ? 1 : current + 1
-			$obj.play(list[index], true);
-		}, this)
+		// @ts-ignore
+		const images = this.add.group({ key: 'bluebar', repeat: 27, setXY: { x: 196 + cr.x, y: 51 + cr.y, stepY: 19 } });
+		images.children.iterate((child) => {
+			this.tweens.add({
+				targets: child,
+				x: 500,
+				ease: eases.shift(),
+				duration: 2500,
+				delay: 1000,
+				repeat: -1,
+				repeatDelay: 1000,
+				hold: 1000
+			});
+		});
 	}
 }

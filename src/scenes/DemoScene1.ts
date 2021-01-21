@@ -1,3 +1,4 @@
+import CONSTS from '../shared/consts'
 import GameScene from './GameScene'
 
 export default class DemoScene1 extends GameScene {
@@ -11,11 +12,11 @@ export default class DemoScene1 extends GameScene {
 		super.create($data)
 		// 背景
 		this.setBackgroundColor(0x009fcc)
-		// 获取布局属性
-		const lr = this.camera.getLayoutRect()
-		// 边框
-		const graphics = this.add.graphics()
-		graphics.lineStyle(1, 0xA85438, 1)
-		graphics.strokeRect(0, 0, lr.width, lr.height)
+
+
+
+		// const graphics = this.add.graphics()
+		// graphics.lineStyle(3, 0xA85438, 1)
+		// graphics.strokeRect(0, 0, CONSTS.DESIGN_WIDTH, CONSTS.DESIGN_HEIGHT)
 	}
 }

@@ -5,60 +5,40 @@ export default class DemoScene6 extends GameScene {
 		super({ key: 'DemoScene6' })
 	}
 
-	public init(): void { }
+	public init(): void {
+		//  Our attack animation
+		const animConfig = {
+			key: 'attack',
+			frames: this.anims.generateFrameNames('knight', { prefix: 'attack_A/frame', start: 0, end: 13, zeroPad: 4 }),
+			frameRate: 12,
+			repeat: -1
+		};
+		this.anims.create(animConfig);
+	}
 
 	public create($data): void {
 		super.create($data)
 		// 背景
-		this.setBackgroundColor(0x6DD5B5)
+		this.setBackgroundColor(0xD4BB7D)
 
-		// 音频
-		const audio = this.sound.add('overture', { loop: true });
-		// 播放
-		const btn = this.add.text(200, 200, '音频播放')
-		btn.setInteractive({ cursor: 'pointer' }).on('pointerdown', () => {
-			if (audio.isPlaying) {
-				audio.stop()
-				btn.setText('音频播放')
-			} else {
-				audio.play()
-				btn.setText('音频暂停')
-			}
-		}, this)
+		// 雪碧图
+		const sprite = this.add.sprite(250, 100, 'knight', 'attack_A/frame0000').setScale(2.5)
+		sprite.play('attack', true);
 
-		// 视频
-		const lr = this.camera.getLayoutRect()
-		const video = this.add.video(lr.width / 2, 400, 'wormhole').setScale(0.4)
-		video.setInteractive({ cursor: 'pointer' }).on('pointerdown', () => {
-			video.isPlaying() ? video.stop() : video.play()
-		}, this)
+		// 骨骼动画
+		const spine = this.add.spine(180, 500, 'raptor').setScale(0.2);
+		spine.play('gun-holster', true, true);
 
-		// h5 dom
-		var dom = this.add.dom(250, 100, 'div', null, 'h5 dom Hello World');
-		this.tweens.add({
-			targets: dom,
-			angle: 5,
-			duration: 100,
-			yoyo: true,
-			repeat: 5,
-			onStart: () => {
-				dom.setAngle(-5)
-			},
-			onComplete: () => {
-				dom.setAngle(0)
-			}
-		})
+		this.randomPlaySpineAnimation(spine)
+	}
 
-		// 场景进入暂停时触发
-		this.events.once('pause', () => {
-			dom.destroy()
-		}, this)
-		// 退出场景时销毁资源
-		this.events.once('shutdown', () => {
-			audio.stop()
-			audio.destroy()
-			video.stop()
-			video.destroy()
+	private randomPlaySpineAnimation($obj: SpineGameObject) {
+		const list = $obj.getAnimationList()
+		// 点击
+		$obj.setInteractive({ cursor: 'pointer' }).on('pointerdown', () => {
+			const current = list.findIndex(e => e === $obj.getCurrentAnimation().name)
+			const index = current + 1 === list.length ? 1 : current + 1
+			$obj.play(list[index], true);
 		}, this)
 	}
 }
