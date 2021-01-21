@@ -5,10 +5,11 @@ import LoadScene from './scenes/LoadScene'
 import MenuScene from './scenes/MenuScene'
 import DemoScene1 from './scenes/DemoScene1'
 import DemoScene2 from './scenes/DemoScene2'
-import DemoScene3 from './scenes/DemoScene3'
+// import DemoScene3 from './scenes/DemoScene3'
 import DemoScene4 from './scenes/DemoScene4'
 import DemoScene5 from './scenes/DemoScene5'
 import DemoScene6 from './scenes/DemoScene6'
+import DemoScene7 from './scenes/DemoScene7'
 import SampleScene from './scenes/SampleScene'
 const SpinePlugin = window.SpinePlugin
 
@@ -23,24 +24,29 @@ export default class Game {
 		type: CONSTS.GAME_READER_TYPE,
 		width: CONSTS.WINDOW_WIDTH,
 		height: CONSTS.WINDOW_HEIGHT,
+		// width: CONSTS.DESIGN_WIDTH,
+		// height: CONSTS.DESIGN_HEIGHT,
 		parent: 'app',
+		// canvas: document.
 		canvasStyle: 'display: block;',
 		dom: {
 			createContainer: true,
 			behindCanvas: true
 		},
-		scene: [LoadScene, DemoScene1, DemoScene2, DemoScene3, DemoScene4, DemoScene5, DemoScene6, SampleScene, MenuScene],
-		transparent: true,
+		scene: [LoadScene, DemoScene1, DemoScene2, DemoScene4, DemoScene5, DemoScene6, DemoScene7, SampleScene, MenuScene],
+		// transparent: true,
 		autoFocus: true,
 		scale: {
 			mode: Phaser.Scale.FIT,
 			autoCenter: Phaser.Scale.CENTER_BOTH
 		},
 		physics: {
-			default: "arcade"
-		},
-		loader: {
-			timeout: 5000
+			default: "arcade",
+			// default: 'matter',
+			// matter: {
+			// 	gravity: { y: 0 },
+			// 	debug: true
+			// }
 		},
 		plugins: {
 			scene: [

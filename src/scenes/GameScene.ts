@@ -15,6 +15,12 @@ export default class GameScene extends BaseScene {
 		// 初始化适配
 		const _r = new Rectangle(0, 0, CONSTS.DESIGN_WIDTH, CONSTS.DESIGN_HEIGHT)
 		this.initCamera(CONSTS.WINDOW_WIDTH, CONSTS.WINDOW_HEIGHT, _r)
+		// 获取布局属性
+		const lr = this.camera.getLayoutRect()
+		// 边框
+		const graphics = this.add.graphics()
+		graphics.lineStyle(1, 0x000000, 1)
+		graphics.strokeRect(0, 0, lr.width, lr.height)
 		// 过场动画
 		this.scene.scene.events.once('create', this.transitionAnimate.bind(this, $data.duration))
 	}
@@ -26,6 +32,8 @@ export default class GameScene extends BaseScene {
 		const graphics = this.add.graphics()
 		graphics.fillStyle($color, 1)
 		graphics.fillRect(cr.x, cr.y, cr.width, cr.height)
+		//
+		this.children.moveDown(graphics)
 	}
 
 	protected transitionAnimate(duration: number): void {

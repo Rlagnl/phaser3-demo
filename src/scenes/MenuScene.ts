@@ -14,34 +14,15 @@ export default class MenuScene extends BaseScene {
 		this.initCamera(CONSTS.WINDOW_WIDTH, CONSTS.WINDOW_HEIGHT, _r)
 		// 获取摄像机属性
 		const cr = this.camera.getCameraRect()
-
-		this.createOption(cr.x + 20, cr.y + 20, 'Demo1', () => {
-			this.changeScene('DemoScene1')
-		})
-
-		this.createOption(cr.x + 20, cr.y + 60, 'Demo2', () => {
-			this.changeScene('DemoScene2')
-		})
-
-		this.createOption(cr.x + 20, cr.y + 100, 'Demo3', () => {
-			this.changeScene('DemoScene3')
-		})
-
-		this.createOption(cr.x + 20, cr.y + 140, 'Demo4', () => {
-			this.changeScene('DemoScene4')
-		})
-
-		this.createOption(cr.x + 20, cr.y + 180, 'Demo5', () => {
-			this.changeScene('DemoScene5')
-		})
-
-		this.createOption(cr.x + 20, cr.y + 220, 'Demo6', () => {
-			this.changeScene('DemoScene6')
-		})
-
-		this.createOption(cr.x + 20, cr.y + 260, 'Game', () => {
-			this.changeScene('SampleScene')
-		})
+		// 获取场景列表
+		const scenes = this.scene.manager.getScenes(false)
+		// 遍历场景列表，生成导航栏
+		for (let i = 1; i < scenes.length - 1; i++) {
+			const name = scenes[i].scene.key
+			this.createOption(cr.x + 20, cr.y + 20 + i * 40, name, () => {
+				this.changeScene(name)
+			})
+		}
 	}
 
 	private changeScene($scene: string): void {
