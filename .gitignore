@@ -9,3 +9,8 @@ node_modules/
 .vscode
 package-lock.json
 yarn.lock
+
+# ai config files
+# .agents/
+# .trae/
+# skills-lock.json

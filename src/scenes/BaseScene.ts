@@ -18,7 +18,12 @@ export default class BaseScene extends Phaser.Scene {
 	 * @see     Phaser.Geom.Rectangle
 	 */
 	public initCamera($windowWidth: integer, $windowHeight: integer, $layoutAir: Rectangle): void {
-		this.camera = new SimpleCameraPlugin(this.cameras.main, $windowWidth, $windowHeight, $layoutAir)
+		this.camera = new SimpleCameraPlugin(
+			this.cameras.main,
+			$windowWidth,
+			$windowHeight,
+			$layoutAir
+		)
 	}
 
 	/**

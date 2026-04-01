@@ -29,7 +29,17 @@ export default class Game {
 			createContainer: true,
 			behindCanvas: true
 		},
-		scene: [LoadScene, DemoScene1, DemoScene2, DemoScene3, DemoScene4, DemoScene5, DemoScene6, SampleScene, MenuScene],
+		scene: [
+			LoadScene,
+			DemoScene1,
+			DemoScene2,
+			DemoScene3,
+			DemoScene4,
+			DemoScene5,
+			DemoScene6,
+			SampleScene,
+			MenuScene
+		],
 		transparent: true,
 		autoFocus: true,
 		scale: {
@@ -37,14 +47,19 @@ export default class Game {
 			autoCenter: Phaser.Scale.CENTER_BOTH
 		},
 		physics: {
-			default: "arcade"
+			default: 'arcade'
 		},
 		loader: {
 			timeout: 5000
 		},
 		plugins: {
 			scene: [
-				{ key: 'SpinePlugin', plugin: SpinePlugin, systemKey: 'SpinePlugin', sceneKey: 'Spine' }
+				{
+					key: 'SpinePlugin',
+					plugin: SpinePlugin,
+					systemKey: 'SpinePlugin',
+					sceneKey: 'Spine'
+				}
 			]
 		}
 	}

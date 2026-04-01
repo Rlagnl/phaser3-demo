@@ -5,12 +5,12 @@ export default class DemoScene4 extends GameScene {
 		super({ key: 'DemoScene4' })
 	}
 
-	public init(): void { }
+	public init(): void {}
 
 	public create($data): void {
 		super.create($data)
 		// 背景
-		this.setBackgroundColor(0xC2A0E3)
+		this.setBackgroundColor(0xc2a0e3)
 
 		const eases = [
 			'Linear',
@@ -41,7 +41,7 @@ export default class DemoScene4 extends GameScene {
 			'Circ.easeInOut',
 			'Back.easeInOut',
 			'Bounce.easeInOut'
-		];
+		]
 
 		const cr = this.camera.getCameraRect()
 		const first = this.add.image(196 + cr.x, 32 + cr.y, 'redbar')
@@ -54,10 +54,13 @@ export default class DemoScene4 extends GameScene {
 			repeat: -1,
 			repeatDelay: 1000,
 			hold: 1000
-		});
-
-		// @ts-ignore
-		const images = this.add.group({ key: 'bluebar', repeat: 27, setXY: { x: 196 + cr.x, y: 51 + cr.y, stepY: 19 } });
+		})
+		const config: Phaser.Types.GameObjects.Group.GroupCreateConfig = {
+			key: 'bluebar',
+			repeat: 27,
+			setXY: { x: 196 + cr.x, y: 51 + cr.y, stepY: 19 }
+		}
+		const images = this.add.group(config)
 		images.children.iterate((child) => {
 			this.tweens.add({
 				targets: child,
@@ -68,7 +71,7 @@ export default class DemoScene4 extends GameScene {
 				repeat: -1,
 				repeatDelay: 1000,
 				hold: 1000
-			});
-		});
+			})
+		})
 	}
 }

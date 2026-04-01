@@ -11,22 +11,29 @@ export default class LoadScene extends Phaser.Scene {
 		super({ key: 'LoadScene' })
 	}
 
-	public init(): void { }
+	public init(): void {}
 
 	public preload(): void {
 		this.load.image('logo', image)
-		this.load.image('effectBlock', effectBlock);
-		this.load.image('redbar', redbar);
-		this.load.image('bluebar', bluebar);
-		this.load.atlas('knight', knightSprite, knightJson);
-		this.load.spine('raptor', '/static/spines/raptor-pro.json', '/static/spines/raptor-pro.atlas', true);
+		this.load.image('effectBlock', effectBlock)
+		this.load.image('redbar', redbar)
+		this.load.image('bluebar', bluebar)
+
+		this.load.atlas('knight', knightSprite, knightJson)
+
+		this.load.spine(
+			'raptor',
+			'/static/spines/raptor-pro.json',
+			'/static/spines/raptor-pro.atlas',
+			true
+		)
 		this.load.audio('overture', [overture])
 		this.load.video('wormhole', wormhole)
 	}
 
 	public create(): void {
 		this.scene.start('MenuScene')
-		this.scene.start("DemoScene1", { duration: 500 })
+		this.scene.start('DemoScene1', { duration: 500 })
 		// const index = this.scene.getIndex(this)
 		// const scenes = this.scene.manager.getScenes(false)
 		// const next = scenes[index + 1].scene.key
